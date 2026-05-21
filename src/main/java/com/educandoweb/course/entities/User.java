@@ -3,9 +3,19 @@ package com.educandoweb.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+//sempre importa com a espicificação
+import jakarta.persistence.Entity;//e a especificação do jpa e o org.hibernate e a implementação
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+@Entity
+@Table(name="tb_user")//especificando o nome da tabela de dados, User é uma palavra reservada do banco de dados h2
 public class User implements Serializable {//transformar em cadeia de bites pra trafegar na rede
 	private static final long serialVersionUID = 1L;
 	
+	@Id//mostra qual e a chave primaria do banco de dados
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//auto-incremento
 	private Long id;
 	private String name;
 	private String email;
