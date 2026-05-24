@@ -1,6 +1,8 @@
 package com.educandoweb.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 //sempre importa com a espicificação
@@ -8,6 +10,7 @@ import jakarta.persistence.Entity;//e a especificação do jpa e o org.hibernate
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="tb_user")//especificando o nome da tabela de dados, User é uma palavra reservada do banco de dados h2
@@ -22,6 +25,9 @@ public class User implements Serializable {//transformar em cadeia de bites pra 
 	private String phone;
 	private String password;
 	
+	@OneToMany(mappedBy = "client")// e feito para associar com o nome do atributo passado da associação de User
+	private List<Order> orders = new ArrayList<>();
+	
 	public User() {}
 
 	public User(Long id, String name, String email, String phone, String password) {
@@ -32,7 +38,10 @@ public class User implements Serializable {//transformar em cadeia de bites pra 
 		this.phone = phone;
 		this.password = password;
 	}
-
+//collections
+	public List<Order> getOrder(){
+		return orders;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -72,7 +81,8 @@ public class User implements Serializable {//transformar em cadeia de bites pra 
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
