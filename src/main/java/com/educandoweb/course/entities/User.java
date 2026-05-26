@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //sempre importa com a espicificação
 import jakarta.persistence.Entity;//e a especificação do jpa e o org.hibernate e a implementação
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class User implements Serializable {//transformar em cadeia de bites pra 
 	private String phone;
 	private String password;
 	
+	@JsonIgnore // e feito isso por conta da associação de mão dupla, fica com um loop finito, isso aqui 
 	@OneToMany(mappedBy = "client")// e feito para associar com o nome do atributo passado da associação de User
 	private List<Order> orders = new ArrayList<>();
 	
@@ -39,7 +42,7 @@ public class User implements Serializable {//transformar em cadeia de bites pra 
 		this.password = password;
 	}
 //collections
-	public List<Order> getOrder(){
+	public List<Order> getOrders(){
 		return orders;
 	}
 	public Long getId() {

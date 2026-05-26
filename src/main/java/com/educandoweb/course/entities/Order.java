@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +23,10 @@ public class Order implements Serializable {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	private Long id;
+	//garante que o instant seja mostrando no JSON no fromato de string no padrão ISO 8601 
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant date;
+	
 	@ManyToOne //para transformar em uma chave estrangeira e necessário, necessário por conta do relacionamento de associação
 	@JoinColumn(name="client_id")//nome da chave estrangeira para o nome no banco de dados
 	private User client;
