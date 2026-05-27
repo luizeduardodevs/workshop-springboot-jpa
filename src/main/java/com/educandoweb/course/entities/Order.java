@@ -40,7 +40,7 @@ public class Order implements Serializable {
 		super();
 		this.id = id;
 		this.date = date;
-		setOrderStatus(orderStatus);
+		setOrderStatus(orderStatus);//dentro dele occore a conversão de integer para enum
 		this.client = client;
 	}
 
@@ -61,13 +61,13 @@ public class Order implements Serializable {
 		this.date = date;
 	}
 	
-	public OrderStatus getOrderStatus() {
+	public OrderStatus getOrderStatus() {//integer para enum
 		return OrderStatus.valueOf(orderStatus);//convertendo o numero inteiro pra orderstatus chamado o método valueOf
-	}
+	}//valueof procura enum pelo codigo 
 
-	public void setOrderStatus(OrderStatus orderStatus) {
+	public void setOrderStatus(OrderStatus orderStatus) {//enum para inteiro
 		if(orderStatus != null) {
-		this.orderStatus = orderStatus.getCode();
+		this.orderStatus = orderStatus.getCode();//getcode e quem pega o numero do enum
 		}
 	}
 
