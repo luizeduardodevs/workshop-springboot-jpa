@@ -28,7 +28,7 @@ public class Product implements Serializable {
 	private String imgUrl;
 	
 	@ManyToMany
-	@JoinTable(name = "tb_product_category", 
+	@JoinTable(name = "tb_product_category", // join table e pra criar uma table intermediária/ de ligação
 	joinColumns = @JoinColumn(name ="product_id"),
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();//garante que minha coleção comece vazia e não comece nula, por isso foi instaciada

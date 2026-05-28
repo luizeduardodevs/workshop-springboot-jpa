@@ -23,7 +23,7 @@ public class Category implements Serializable {
 	private Long id;
 	private String name;
 	
-	@JsonIgnore
+	@JsonIgnore //ingora um lado das tabelas, pra nao ter loop infinito
 	@ManyToMany(mappedBy = "categories")//coloca o nome da coleção da outra classe, falando que foi mapeado pela outra classe
 	private Set<Product> products = new HashSet<>();
 	public Category() {}
