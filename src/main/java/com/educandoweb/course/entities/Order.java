@@ -37,6 +37,7 @@ public class Order implements Serializable {
 	@JoinColumn(name="client_id")//nome da chave estrangeira para o nome no banco de dados
 	private User client;
 	
+	
 	@OneToMany(mappedBy="id.order")// e a associação do orderitempk dentro da classe orderitem
 	private Set<OrderItem> items = new HashSet<>();
 

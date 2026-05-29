@@ -9,7 +9,7 @@ import com.educandoweb.course.entities.Product;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-@Embeddable
+@Embeddable // os atributos dessa classe são incorporados dentro de outra entidade
 public class OrderItemPK implements Serializable{//é uma classe auxiliar
 	private static final long serialVersionUID = 1L;
 	

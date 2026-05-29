@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.educandoweb.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -13,9 +14,11 @@ import jakarta.persistence.Table;
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 // calsse auxiliar tem que ser instanciada pq se não ela começa valendo null
-	@EmbeddedId
+	@EmbeddedId// quer dizer que a chave primária e composta por mais de um campo nesse caso
+	//@JoinColumn(name="order_id") dentro da classe auxiliar
+	//@JoinColumn(name="product_id")
 	private OrderItemPK id = new OrderItemPK();// é o identificador da classe corrrespondente a chave primária
-	
+	// esse id tem dentro dele dois atributos da classe orderItemPk são order e product
 	private Integer quantity;
 	private Double price;
 	
@@ -25,19 +28,20 @@ public class OrderItem implements Serializable {
 
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
 		super();
-		id.setOrder(order);
+		id.setOrder(order);//o id consegue accesar dentro do atibuto Order e receber o parametro ordem pra dentro dele 
 		id.setProduct(product);
 		this.quantity = quantity;
 		this.price = price;
 	}
-	
+	@JsonIgnore// e colocado aqui por nao ter um atributo direto nessa entidade
+	// existe apenas o private orderItemPK, que jackson encontra o relacionamento por aqui, usando o get
 	public Order getOrder() {
 		return id.getOrder();
 	}
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
-	
+
 	public Product getProduct() {
 		return id.getProduct();
 	}
