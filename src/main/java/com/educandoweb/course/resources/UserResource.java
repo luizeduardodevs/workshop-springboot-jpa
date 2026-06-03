@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +34,14 @@ public class UserResource {
 	//essa anotação faz com que o spring aceite o value do getmapping, o parametro do método recebe a url"{/id}
 	public ResponseEntity<User> findById(@PathVariable Long id){
 		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	// pra inserir voce utiliza o POSTMAPPING, pra recuperar usa o get
+	@PostMapping
+	public ResponseEntity<User> insert (@RequestBody User obj){//recebe um objeto do tipo user
+		//pra falar que esse objeto vai chegar la no json e ser deserializado pra um objeto user no java e necessario a anotação
+		obj = service.insert(obj);
 		return ResponseEntity.ok().body(obj);
 	}
 }
