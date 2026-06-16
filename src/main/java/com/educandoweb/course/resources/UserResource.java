@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,5 +44,11 @@ public class UserResource {
 		//pra falar que esse objeto vai chegar la no json e ser deserializado pra um objeto user no java e necessario a anotação
 		obj = service.insert(obj);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id){//retornando void pq nao vai retorno so vai deletar
+		service.delete(id);//codigo de um http que nao tem conteúdo e 204
+		return ResponseEntity.noContent().build();
 	}
 }
